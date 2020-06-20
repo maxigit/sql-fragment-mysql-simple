@@ -73,6 +73,7 @@ type instance Tuple '[a, b, c, d, e, f, g, h, i, j, k, l] = ((GetValue a), (GetV
 type instance Tuple '[a, b, c, d, e, f, g, h, i, j, k, l, m] = ((GetValue a), (GetValue b), (GetValue c), (GetValue d), (GetValue e), (GetValue f), (GetValue g), (GetValue h), (GetValue i), (GetValue j), (GetValue k), (GetValue l), (GetValue m))
 type instance Tuple '[a, b, c, d, e, f, g, h, i, j, k, l, m, n] = ((GetValue a), (GetValue b), (GetValue c), (GetValue d), (GetValue e), (GetValue f), (GetValue g), (GetValue h), (GetValue i), (GetValue j), (GetValue k), (GetValue l), (GetValue m), (GetValue n))
 
+instance (Semigroup a) =>  Semigroup (SQL.Only a) where
+    a <>  b = SQL.Only (SQL.fromOnly a <> SQL.fromOnly b)
 instance (Monoid a) =>  Monoid (SQL.Only a) where
     mempty = SQL.Only mempty
-    mappend  a b = SQL.Only (SQL.fromOnly a `mappend` SQL.fromOnly b)
